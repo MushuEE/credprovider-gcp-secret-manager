@@ -1,0 +1,41 @@
+# Binaries
+/bin/
+# stray output from `go build` without -o
+/gsm-credential-provider
+
+# Test artifacts (JUnit XML, gotestsum JSON)
+/_artifacts/
+
+# Developers can store local stuff in dirs named __something
+__*
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# AI IDEs and CLIs
+.aider*
+.claude/
+.cline/
+.codex/
+.continue/
+.copilot/
+.cursor/
+.gemini/
+.goose/
+.kiro/
+.opencode/
+.qwen/
+.roo/
+.trae/
+.windsurf/
+
+# Local worktrees
+/.worktrees/
