@@ -6,32 +6,60 @@ guidelines.
 
 ## Before you begin
 
-### Sign our Contributor License Agreement
+### Sign off your commits
 
-Contributions to this project must be accompanied by a
-[Contributor License Agreement](https://cla.developers.google.com/about) (CLA).
-You (or your employer) retain the copyright to your contribution; this simply
-gives us permission to use and redistribute your contributions as part of the
-project.
+Every commit must be signed off under the
+[Developer Certificate of Origin](https://developercertificate.org/) (DCO).
+The `Signed-off-by` line certifies that you wrote the change or otherwise have
+the right to submit it under the project's license.
 
-If you or your current employer have already signed the Google CLA (even if it
-was for a different project), you probably don't need to do it again.
+Sign off with your real name, not an anonymous ID or a false name. It doesn't
+need to be your legal name, just the name the community knows you by. See the
+[CNCF DCO guidelines](https://github.com/cncf/foundation/blob/main/policies-guidance/dco-guidelines.md).
 
-Visit <https://cla.developers.google.com/> to see your current agreements or to
-sign a new one.
+Git adds the line with `-s`, using `user.name` and `user.email` from your git
+config. The name and email must match the commit author.
+
+```sh
+git commit -s -m "fix typo in README"
+```
+
+The DCO check on your PR fails if any commit is missing a sign-off. To sign off
+the commits already on your branch, then force-push:
+
+```sh
+git rebase --signoff upstream/main
+```
 
 ### Review our Community Guidelines
 
-This project follows [Google's Open Source Community Guidelines](https://opensource.google/conduct/).
+This project follows [Google's Open Source Community
+Guidelines](https://opensource.google/conduct/).
+
+### Follow the Agent Substrate project policies
+
+This repository is part of the Agent Substrate project and shares its
+maintainers, governance and collaboration norms, including the AI contribution
+policy. See
+[COLLABORATING.md](https://github.com/agent-substrate/substrate/blob/main/COLLABORATING.md),
+[GOVERNANCE.md](https://github.com/agent-substrate/substrate/blob/main/GOVERNANCE.md)
+and
+[MAINTAINERS.md](https://github.com/agent-substrate/substrate/blob/main/MAINTAINERS.md)
+in [agent-substrate/substrate](https://github.com/agent-substrate/substrate).
 
 ## Contribution process
+
+### Code Reviews
 
 All submissions, including submissions by project members, require review. We
 use [GitHub pull requests](https://docs.github.com/articles/about-pull-requests)
 for this purpose.
 
-All code changes should be accompanied by tests. We will not merge code that
-does not have tests, and we will not merge code that causes tests to fail.
+Changes that add or alter behavior should come with tests, and existing tests
+should be updated when behavior they cover changes. We will not merge code that
+causes tests to fail. Every test runs in CI on every PR, so please don't add
+tests whose only purpose is to raise coverage numbers. Tests should be
+inherently valuable for future changes.
 
 ### Copyright Headers
 
