@@ -39,8 +39,8 @@ import (
 
 	"go.ate.dev/substrate/api/credprovider/v1"
 
-	"go.ate.dev/substrate/internal/plugins/gcp-secret-manager/internal/mtls"
-	"go.ate.dev/substrate/internal/plugins/gcp-secret-manager/internal/provider"
+	"plugins.go.ate.dev/credprovider-gcp-secret-manager/internal/mtls"
+	"plugins.go.ate.dev/credprovider-gcp-secret-manager/internal/provider"
 )
 
 var (

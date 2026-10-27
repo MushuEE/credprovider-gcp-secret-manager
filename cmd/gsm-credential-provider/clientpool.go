@@ -18,7 +18,7 @@ import (
 	"errors"
 	"sync"
 
-	"go.ate.dev/substrate/internal/plugins/gcp-secret-manager/internal/provider"
+	"plugins.go.ate.dev/credprovider-gcp-secret-manager/internal/provider"
 )
 
 // secretManagerClient is a closable SecretAccessor.

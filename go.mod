@@ -1,4 +1,4 @@
-module go.ate.dev/substrate/internal/plugins/gcp-secret-manager
+module plugins.go.ate.dev/credprovider-gcp-secret-manager
 
 go 1.27.0
 
@@ -7,7 +7,7 @@ toolchain go1.27.3
 require (
 	cloud.google.com/go/secretmanager v1.16.0
 	github.com/googleapis/gax-go/v2 v2.21.0
-	go.ate.dev/substrate v0.2.0
+	go.ate.dev/substrate v0.6.1-0.20261027042252-635c521cc682
 	google.golang.org/api v0.274.0
 	google.golang.org/grpc v1.83.2
 	sigs.k8s.io/yaml v1.6.0
@@ -43,5 +43,3 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260803160001-6ac0973c030d // indirect
 	google.golang.org/protobuf v1.36.12 // indirect
 )
-
-replace go.ate.dev/substrate => ../../..

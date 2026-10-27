@@ -1,8 +1,6 @@
 # gcp-secret-manager credential provider
 
-> [!NOTE]
-> This provider is hosted in the substrate repository temporarily. It will move
-> to a dedicated repository in the near future.
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A [substrate](https://github.com/agent-substrate/substrate) credential provider
 backed by Google Cloud Secret Manager. It implements substrate's
@@ -10,8 +8,6 @@ backed by Google Cloud Secret Manager. It implements substrate's
 credential injection: given an `ate-secret://secretmanager.googleapis.com/...`
 URI, it reads the secret version from Secret Manager and returns its payload,
 so the secret stays in Secret Manager and substrate never stores it.
-
-This directory is a Go module of its own, so that it can move out as it is.
 
 ## Endpoint
 
@@ -153,7 +149,7 @@ For a regional secret, see step 5.
 **2. Apply the project policy.** Edit
 [`config/project-policy.yaml`](config/project-policy.yaml), the
 `gsm-credential-provider-project-policy` ConfigMap, to list the projects each
-atespace may resolve secrets in, then apply it from this directory. The
+atespace may resolve secrets in, then apply it from this repository. The
 provider's pod mounts it, so it must exist first. `make deploy` leaves it out,
 so a redeploy never overwrites it.
 
@@ -168,7 +164,7 @@ After editing it, restart the provider:
 kubectl -n ate-system rollout restart deployment/gsm-credential-provider
 ```
 
-**3. Deploy the provider.** From this directory:
+**3. Deploy the provider.** From this repository:
 
 ```bash
 KO_DOCKER_REPO=<registry> make deploy
@@ -181,7 +177,7 @@ no metadata server supplies them; mount a service account key into the pod and
 point `GOOGLE_APPLICATION_CREDENTIALS` at it. A missing IAM grant does not stop
 the provider: it fails each fetch with `PermissionDenied`.
 
-**4. Point the egress gateway at the provider.** From the repository root:
+**4. Point the egress gateway at the provider.** From a substrate checkout:
 
 ```bash
 hack/install-ate.sh --deploy-atenet \
@@ -236,8 +232,8 @@ provider while the gateway still points at it makes every credential fetch
 fail.
 
 ```bash
-hack/install-ate.sh --deploy-atenet --credential-provider='{"enabled":false}'   # from the repository root
-make undeploy                                                        # from this directory
+hack/install-ate.sh --deploy-atenet --credential-provider='{"enabled":false}'   # from a substrate checkout
+make undeploy                                                        # from this repository
 ```
 
 `make undeploy` removes the provider's ServiceAccount, Deployment and Service,
@@ -266,17 +262,7 @@ make fmt                # gofmt -w .
 make release-manifest   # manifests with the image pinned by digest
 ```
 
-`go.mod` replaces the substrate module with the enclosing checkout, so the
-provider builds and tests against the current `credprovider` API.
-
-The module imports nothing of substrate's but its public `api/` and `pkg/`
-packages, so it can be copied out as it is;
-`TestImportsOnlySubstratePublicPackages` fails on any other substrate import.
-For that reason, two packages are copies kept in step by hand:
+Two packages are copies of substrate code kept in step by hand, since only
+substrate's public `api/` and `pkg/` packages can be imported:
 `internal/credbundle` of substrate's `internal/credbundle`, and `internal/mtls`
 of the server credentials in `cmd/credential-provider/kubernetes-secrets`.
-
-To move the module to its own repository, rename the module path in `go.mod`,
-in the Go imports, and in the `ko://` image of `config/deployment.yaml`, then
-drop the `replace` directive so the `require` of a released substrate version
-applies.

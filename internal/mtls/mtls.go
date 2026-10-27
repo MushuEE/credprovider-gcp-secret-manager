@@ -25,7 +25,7 @@ import (
 
 	"google.golang.org/grpc/credentials"
 
-	"go.ate.dev/substrate/internal/plugins/gcp-secret-manager/internal/credbundle"
+	"plugins.go.ate.dev/credprovider-gcp-secret-manager/internal/credbundle"
 )
 
 // Config names the files and caller identity ServerCredentials serves with.
