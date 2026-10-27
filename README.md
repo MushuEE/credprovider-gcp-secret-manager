@@ -106,8 +106,8 @@ Error messages name the key but never quote the payload.
 
 Prerequisites:
 
-- A GKE cluster with Workload Identity Federation, running substrate v0.2.0 or
-  later. The provider gets its Google credentials from GKE's metadata server,
+- A GKE cluster with Workload Identity Federation, running a substrate newer
+  than v0.6.0, whose egress gateway calls the `substrate.credprovider.v1` API. The provider gets its Google credentials from GKE's metadata server,
   and its serving certificate and its callers' trust bundle from substrate's
   pod certificate controller.
 - A registry for `KO_DOCKER_REPO`. The Makefile runs [ko](https://ko.build)
