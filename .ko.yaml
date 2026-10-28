@@ -19,3 +19,11 @@ defaultBaseImage: gcr.io/distroless/static-debian13:latest@sha256:15f8637509792e
 defaultPlatforms:
   - linux/amd64
   - linux/arm64
+
+# Stamps main.version with VERSION, the release tag. With VERSION unset the
+# binary reports the module version Go records from git.
+builds:
+  - id: gsm-credential-provider
+    main: ./cmd/gsm-credential-provider
+    ldflags:
+      - -X main.version={{.Env.VERSION}}
