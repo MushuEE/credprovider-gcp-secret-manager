@@ -52,12 +52,14 @@ release-manifest:
 	kubectl kustomize config | $(KO) resolve $(KO_FLAGS) -f -
 
 # Builds the image for VERSION, a release tag, and pushes it to KO_DOCKER_REPO
-# tagged VERSION, for the platforms in .ko.yaml. Run it from a clean checkout of
-# the tag.
+# tagged VERSION. Run it from a clean checkout of the tag. The platforms are
+# set here, so a KO_DEFAULTPLATFORMS left set for kind cannot narrow a release.
+RELEASE_PLATFORMS := linux/amd64,linux/arm64
+
 .PHONY: release-images
 release-images:
 	@if [ -z "$(VERSION)" ] || [ -z "$(KO_DOCKER_REPO)" ]; then echo "VERSION and KO_DOCKER_REPO must be set"; exit 1; fi
-	VERSION=$(VERSION) $(KO) build $(KO_FLAGS) --tags $(VERSION) ./cmd/gsm-credential-provider
+	VERSION=$(VERSION) $(KO) build $(KO_FLAGS) --platform=$(RELEASE_PLATFORMS) --tags $(VERSION) ./cmd/gsm-credential-provider
 
 .PHONY: undeploy
 undeploy:
